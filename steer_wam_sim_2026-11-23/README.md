@@ -7,6 +7,7 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 - 2026-11-23: book_planner.gif replaced with the j6-legal planner success (seed 833001, 720 steps).
 - 2026-11-23: chips_planner is a current success under standard settings (no longer treated as a stopgap); stopgap/pre-fix marks now follow the tile notes only.
 - 2026-11-23: README regenerated from the gallery and status files.
+- 2026-11-23: pour_planner.gif replaced with the side-grasp pour success (seed 840001, 696 steps, 100% of grains in the orange cup, j6 kept above the real arm's limit).
 
 ## Chips bag (`chips`)
 
@@ -33,7 +34,7 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
-| ![pour planner](pour_planner.gif) | planner | 840001 | 416 | success | 100% of grains into the orange cup, 0% spill, both cups upright (lip-fixed tilt) |
+| ![pour planner](pour_planner.gif) | planner | 840001 | 696 | success | scripted planner, SIDE GRASP (hand horizontal, tilt by wrist roll about the approach axis; j6 >= 1.57 throughout, min 1.603; SW_J6_LIMIT=1): 100% of grains in the orange cup, both upright, set down; SW_CTRL_DR=2 SW_SERVO_FF=1 SW_DR=1 SW_FORK_TC=last SW_CTRL_STIFF=1 SW_CAM_EPOCHS=BC |
 | (none yet) | steering | - | - | not yet available | - |
 
 ## Book to edge and pick (`book`)
@@ -59,7 +60,7 @@ Quoted as written in the run status file (generated 2026-11-23).
 | Bag with handles (BAG) | not in doc conclusion; replay gate PASS (marginal) 4/5 held-out | pending (doc: 'filled in when the jobs end') | not stated in doc | 2026-11-23 02:31 |
 | Bag without handles (BAGPICK) | 20/24 strict (83%), provisional | 8/12 strict | 8 episodes pass converter dry run (0 bad) and language audit; provider R2 verified (coordinator note; doc text still says provisional) | 2026-11-23 02:31 |
 | Chips under book (CHIPS) | replay gate FAILS (0/9 no-contact replays pass); no acceptance run | not run | all pilot data provisional / untrusted | 2026-11-23 02:57 |
-| Pour green to orange (POUR) | 21/24 strict (87.5%) | pending (placeholder in doc) | not stated in doc | 2026-11-23 03:14 |
-| Book to edge and pick (BOOK) | 80/100 over 5 tasks (book_pick 12/20) | 0/60 (both variants) | nothing to convert (0 strict successes) | 2026-11-23 03:10 |
+| Pour green to orange (POUR) | 21/24 strict (87.5%) | pending (placeholder in doc) | not stated in doc | 2026-11-23 03:25 |
+| Book to edge and pick (BOOK) | 80/100 over 5 tasks (book_pick 12/20) | 0/60 (both variants) | nothing to convert (0 strict successes) | 2026-11-23 03:23 |
 | Fold towel, MuJoCo (CLOTH) | 1-3/16, target >=70% NOT met | pending (doc: numbers pending) | not stated in doc | 2026-11-23 02:30 |
 | Fold towel, Genesis PBD (GCLOTH) | no doc yet | no doc yet | no doc yet | - |
