@@ -9,6 +9,8 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 - 2026-11-23: README regenerated from the gallery and status files.
 - 2026-11-23: pour_planner.gif replaced with the side-grasp pour success (seed 840001, 696 steps, 100% of grains in the orange cup, j6 kept above the real arm's limit).
 - 2026-11-23: book_steering.gif replaced (the earlier failure is gone) with the first book steering success (seed 835000, 320 steps). This is NOT pure steering: the planner's own chunk was executed on 30% of steps (slide phase 80%, grasp phase 10%) and CS-Pi-guided pi0.5 on 70%.
+- 2026-11-23: book_steering.gif replaced (seed 836105, 640 steps): steering with planner fallback under the real-arm torque-clamp settings; the planner's own chunk was executed on 26% of steps (slide 87%, grasp+lift 17%), pilot 2/12 strict. Not pure steering.
+- 2026-11-23: cloth_steering.gif replaced (MuJoCo towel, seed 860000, 272 steps): same steering success re-rendered with the real brown terry towel look; run without the compliant-arm setting.
 
 ## Chips bag (`chips`)
 
@@ -43,14 +45,14 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
 | ![book planner](book_planner.gif) | planner | 833001 | 720 | success | j6-legal scripted planner (SW_J6_LIMIT=1, grasp search j6 >= 1.65), stored randomised frames (VIS_RECORD), ext \| wrist at 15 fps; min j6 after start 1.980 rad |
-| ![book steering](book_steering.gif) | steering | 835000 | 320 | success (with 30% planner fallback, not pure steering) | steered with planner fallback: 30% of executed steps are the planner's own chunk (slide phase 80%, grasp phase 10%), the rest CS-Pi-guided pi0.5 (70%); standard settings SW_CTRL_DR=3 SW_CTRL_STIFF=1 SW_J6_LIMIT=1 SW_CAM_EPOCHS=BC; mp4 = stored ext \| wrist at 15 fps |
+| ![book steering](book_steering.gif) | steering | 836105 | 640 | success (with planner fallback on 26% of steps, not pure steering) | Book slide-to-edge then pick (book_platform_1). Steering with planner fallback under the real-arm settings (torque clamp SW_CTRL_CLAMP=1, controller v3, compliant arm, j6 limit): planner's own chunk executed on 26% of steps (slide 87%, grasp+lift 17%); the rest are CS-Pi-guided pi0.5 chunks. Pilot: 2/12 strict. Not pure steering. |
 
-## Cloth (towel fold) (`cloth`)
+## Cloth (MuJoCo towel fold) (`cloth`)
 
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
 | ![cloth planner](cloth_planner.gif) | planner | 720000 | 176 | success (**PRE-FIX / STOPGAP tile**) | original steering-search settings (bench twin); bench-scene version being fixed |
-| ![cloth steering](cloth_steering.gif) | steering | 860000 | 272 | success | steered success (pilot without compliant arm); towel folded |
+| ![cloth steering](cloth_steering.gif) | steering | 860000 | 272 | success | MuJoCo towel. Steering pilot success (soft CS-Pi, SW_CTRL_DR=2 SW_SERVO_FF=1 SW_DR=1 FORK_TC=last, no STIFF, 2 cm mesh, pre-calibration material), re-rendered by replaying its executed actions with the new towel visuals: B-spline skin + real brown terry dobby look (2026-11-22 towel), counter-light cloth tone; replay ends in strict success (log drift after the first trial close, mm-level) |
 
 ## Status
 
@@ -58,10 +60,10 @@ Quoted as written in the run status file (generated 2026-11-23).
 
 | Task | Planner | Pilot (steering) | Data | Updated |
 |---|---|---|---|---|
-| Bag with handles (BAG) | not in doc conclusion; replay gate PASS (marginal) 4/5 held-out | pending (doc: 'filled in when the jobs end') | not stated in doc | 2026-11-23 02:31 |
+| Bag with handles (BAG) | not in doc conclusion; replay gate PASS (marginal) 4/5 held-out | pending (doc: 'filled in when the jobs end') | not stated in doc | 2026-11-23 04:23 |
 | Bag without handles (BAGPICK) | 20/24 strict (83%), provisional | 8/12 strict | 8 episodes pass converter dry run (0 bad) and language audit; provider R2 verified (coordinator note; doc text still says provisional) | 2026-11-23 02:31 |
-| Chips under book (CHIPS) | replay gate FAILS (0/9 no-contact replays pass); no acceptance run | not run | all pilot data provisional / untrusted | 2026-11-23 02:57 |
-| Pour green to orange (POUR) | 21/24 strict (87.5%) | pending (placeholder in doc) | not stated in doc | 2026-11-23 03:25 |
-| Book to edge and pick (BOOK) | 80/100 over 5 tasks (book_pick 12/20) | 0/60 (both variants) | nothing to convert (0 strict successes) | 2026-11-23 03:23 |
+| Chips under book (CHIPS) | replay gate FAILS (0/9 no-contact replays pass); no acceptance run | not run | all pilot data provisional / untrusted | 2026-11-23 03:48 |
+| Pour green to orange (POUR) | top-down rim grasp 21/24 (87.5%), not valid for the real arm (j6 1.49-1.55); side grasp (j6-legal) 5/21 (24%) | no steering pilot episode completed; "Not ready for steering data" | planner-only numbers; no pour steering tile | 2026-11-23 04:00 |
+| Book to edge and pick (BOOK) | 86/100 (Wilson 78-92%), strict 84/100 (j6-safe, SW_J6_LIMIT=1) | planner-fallback steering 2/12 strict (Wilson 5-45%); earlier steering without fallback 0/60 | planner data: 500 episodes (100 per task), 189,600 frames, 15.9 GB; converter dry run 0 bad, language audit 500/500 | 2026-11-23 04:31 |
 | Fold towel, MuJoCo (CLOTH) | 1-3/16, target >=70% NOT met | pending (doc: numbers pending) | not stated in doc | 2026-11-23 02:30 |
 | Fold towel, Genesis PBD (GCLOTH) | no doc yet | no doc yet | no doc yet | - |
