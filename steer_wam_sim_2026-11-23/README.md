@@ -2,8 +2,12 @@
 
 MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of either the scripted planner or the steered pi0.5-DROID policy (soft CS-Pi steering), shown as exterior camera | wrist camera side by side. Physics, visuals, camera and controller are domain-randomised. Tiles marked FAILURE or PRE-FIX / STOPGAP are not representative final results.
 
+Intent-only steering (a variant) uses only the planner's direction to the next subgoal as the steering signal; every executed action, including the gripper, is the policy's own, with no planner actions.
+
 ## Updates
 
+- 2026-11-23: bag_pick_intent.gif added (intent-only soft CS-Pi steering, seed 880004, 216 steps, success; pilot 3/12 strict vs scripted planner 9/12 on the same seeds).
+- 2026-11-23: Intent-only on the book task: 0/24 so far (current steering 16/24, planner 18/24 on the same seeds).
 - 2026-11-23: book_planner.gif replaced with the j6-legal planner success (seed 833001, 720 steps).
 - 2026-11-23: chips_planner is a current success under standard settings (no longer treated as a stopgap); stopgap/pre-fix marks now follow the tile notes only.
 - 2026-11-23: chips_planner.gif replaced (seed 800103, 272 steps, success, occlusion 50%, scripted planner on the creep-fixed packet asset).
@@ -35,6 +39,7 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 |---|---|---|---|---|---|
 | ![bag_pick planner](bag_pick_planner.gif) | planner | 850002 | 80 | success | placement P1 |
 | ![bag_pick steering](bag_pick_steering.gif) | steering | 850002 | 72 | success | pilot_a |
+| ![bag_pick intent-only](bag_pick_intent.gif) | intent-only steering | 880004 | 216 | success | Intent-only soft CS-Pi: steering uses only the planner's direction to the next subgoal; every executed action, including the gripper, is pi0.5's own (no planner actions). Pilot 3/12 strict; the scripted planner gets 9/12 on the same seeds. |
 
 ## Pour (`pour`)
 
