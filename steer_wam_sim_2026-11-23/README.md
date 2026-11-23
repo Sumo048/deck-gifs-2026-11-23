@@ -6,6 +6,7 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 
 ## Updates
 
+- 2026-11-23: Genesis PBD cloth planner note updated: 6 of 8 held-out seeds strict (7 of 8 by the task criterion). No GIF change.
 - 2026-11-23: cloth_genesis_planner.gif added (Genesis PBD cloth, planner, seed 860100, 1040 steps, success; 3 of the first 5 held-out seeds so far; GIF at half frame rate). Existing cloth rows are labelled MuJoCo towel.
 - 2026-11-23: bag_pick_intent.gif added (intent-only soft CS-Pi steering, seed 880004, 216 steps, success; pilot 3/12 strict vs scripted planner 9/12 on the same seeds).
 - 2026-11-23: Intent-only on the book task: 0/24 so far (current steering 16/24, planner 18/24 on the same seeds).
@@ -62,7 +63,7 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 |---|---|---|---|---|---|
 | ![cloth planner](cloth_planner.gif) | planner (MuJoCo towel) | 720000 | 176 | success (**PRE-FIX / STOPGAP tile**) | original steering-search settings (bench twin); bench-scene version being fixed |
 | ![cloth steering](cloth_steering.gif) | steering (MuJoCo towel) | 860000 | 272 | success | MuJoCo towel. Steering pilot success (soft CS-Pi, SW_CTRL_DR=2 SW_SERVO_FF=1 SW_DR=1 FORK_TC=last, no STIFF, 2 cm mesh, pre-calibration material), re-rendered by replaying its executed actions with the new towel visuals: B-spline skin + real brown terry dobby look (2026-11-22 towel), counter-light cloth tone; replay ends in strict success (log drift after the first trial close, mm-level) |
-| ![cloth genesis planner](cloth_genesis_planner.gif) | planner (Genesis PBD cloth) | 860100 | 1040 | success | Towel parameters and success criterion taken from the owner's real thick-towel teleop half fold; physical friction-limited grasp (no pinning); full real-arm controller settings; first successes, 3 of the first 5 held-out seeds so far; GIF at half frame rate. |
+| ![cloth genesis planner](cloth_genesis_planner.gif) | planner (Genesis PBD cloth) | 860100 | 1040 | success | Towel parameters and success criterion taken from the owner's real thick-towel teleop half fold; physical friction-limited grasp (no pinning); full real-arm controller settings; 6 of 8 held-out seeds strict (7 of 8 by the task criterion); GIF at half frame rate. |
 
 ## Status
 
