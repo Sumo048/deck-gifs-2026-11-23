@@ -6,6 +6,9 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 
 - 2026-11-23: book_planner.gif replaced with the j6-legal planner success (seed 833001, 720 steps).
 - 2026-11-23: chips_planner is a current success under standard settings (no longer treated as a stopgap); stopgap/pre-fix marks now follow the tile notes only.
+- 2026-11-23: chips_planner.gif replaced (seed 800103, 272 steps, success, occlusion 50%, scripted planner on the creep-fixed packet asset).
+- 2026-11-23: chips_steering.gif replaced (seed 800300, 128 steps, success under the real session's success criterion, soft CS-Pi steering of pi0.5, occlusion about 44% after settling). PROVISIONAL: recorded before the real-arm torque clamp and controller v3 were added; the chips replay gate is still pending.
+- 2026-11-23: BOOK status line updated: planner v2 under the torque clamp 86/100 strict; steering with planner fallback and a new transit judge term 11/12 and 12/12, planner's own actions on about 67% of steps. book_steering.gif unchanged.
 - 2026-11-23: README regenerated from the gallery and status files.
 - 2026-11-23: pour_planner.gif replaced with the side-grasp pour success (seed 840001, 696 steps, 100% of grains in the orange cup, j6 kept above the real arm's limit).
 - 2026-11-23: book_steering.gif replaced (the earlier failure is gone) with the first book steering success (seed 835000, 320 steps). This is NOT pure steering: the planner's own chunk was executed on 30% of steps (slide phase 80%, grasp phase 10%) and CS-Pi-guided pi0.5 on 70%.
