@@ -8,6 +8,7 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 - 2026-11-23: chips_planner is a current success under standard settings (no longer treated as a stopgap); stopgap/pre-fix marks now follow the tile notes only.
 - 2026-11-23: README regenerated from the gallery and status files.
 - 2026-11-23: pour_planner.gif replaced with the side-grasp pour success (seed 840001, 696 steps, 100% of grains in the orange cup, j6 kept above the real arm's limit).
+- 2026-11-23: book_steering.gif replaced (the earlier failure is gone) with the first book steering success (seed 835000, 320 steps). This is NOT pure steering: the planner's own chunk was executed on 30% of steps (slide phase 80%, grasp phase 10%) and CS-Pi-guided pi0.5 on 70%.
 
 ## Chips bag (`chips`)
 
@@ -42,7 +43,7 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
 | ![book planner](book_planner.gif) | planner | 833001 | 720 | success | j6-legal scripted planner (SW_J6_LIMIT=1, grasp search j6 >= 1.65), stored randomised frames (VIS_RECORD), ext \| wrist at 15 fps; min j6 after start 1.980 rad |
-| ![book steering](book_steering.gif) | steering | 832000 | 480 | **FAILURE** | steered: slide done (overhang at step 159), side grasp never achieved; steering 0/60 for book tasks |
+| ![book steering](book_steering.gif) | steering | 835000 | 320 | success (with 30% planner fallback, not pure steering) | steered with planner fallback: 30% of executed steps are the planner's own chunk (slide phase 80%, grasp phase 10%), the rest CS-Pi-guided pi0.5 (70%); standard settings SW_CTRL_DR=3 SW_CTRL_STIFF=1 SW_J6_LIMIT=1 SW_CAM_EPOCHS=BC; mp4 = stored ext \| wrist at 15 fps |
 
 ## Cloth (towel fold) (`cloth`)
 
