@@ -41,7 +41,7 @@ Going forward, every steering method uses the planner's gripper timing; a single
 
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
-| ![chips planner](chips_planner.gif) | planner | 800104 | 184 | success | pick up the packet, occlusion 50%; planner 18/24 pull, 21/24 pick at 50% occlusion |
+| ![chips planner](chips_planner.gif) | planner | 800103 | 272 | success | Occlusion 50%; scripted planner on the creep-fixed packet asset; planner 18/24 pull, 21/24 pick at 50% occlusion |
 | ![chips steering](chips_steering.gif) | steering | 800460 | 272 | success (**PROVISIONAL**) | Pull the packet from under the book, occlusion 50%. Soft CS-Pi steering of pi0.5 with the planner's gripper timing (current method, before the unified algorithm), full real-arm settings, episode length set from the real teleop trials. Pilot 10/12 (pull 4/6, pick 6/6). PROVISIONAL: the replay check against the real recordings still fails (packet placement). |
 
 ## Bag with handles (`bag`)
