@@ -6,6 +6,7 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 
 ## Updates
 
+- 2026-11-23: Genesis PBD cloth rows: steering pilot now 5/12 strict (was 3/6 so far); both Genesis rows now state the success criterion (each moved corner within 15 cm of its target). No GIF change.
 - 2026-11-23: cloth_genesis_steering.gif added (Genesis PBD cloth, soft CS-Pi steering, seed 870100, 960 steps, success; pilot 3/6 so far; GIF at half frame rate). Chips steering note: real replay check still fails (packet placement), chips results remain provisional.
 - 2026-11-23: Genesis PBD cloth planner note updated: 6 of 8 held-out seeds strict (7 of 8 by the task criterion). No GIF change.
 - 2026-11-23: cloth_genesis_planner.gif added (Genesis PBD cloth, planner, seed 860100, 1040 steps, success; 3 of the first 5 held-out seeds so far; GIF at half frame rate). Existing cloth rows are labelled MuJoCo towel.
@@ -64,8 +65,8 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 |---|---|---|---|---|---|
 | ![cloth planner](cloth_planner.gif) | planner (MuJoCo towel) | 720000 | 176 | success (**PRE-FIX / STOPGAP tile**) | original steering-search settings (bench twin); bench-scene version being fixed |
 | ![cloth steering](cloth_steering.gif) | steering (MuJoCo towel) | 860000 | 272 | success | MuJoCo towel. Steering pilot success (soft CS-Pi, SW_CTRL_DR=2 SW_SERVO_FF=1 SW_DR=1 FORK_TC=last, no STIFF, 2 cm mesh, pre-calibration material), re-rendered by replaying its executed actions with the new towel visuals: B-spline skin + real brown terry dobby look (2026-11-22 towel), counter-light cloth tone; replay ends in strict success (log drift after the first trial close, mm-level) |
-| ![cloth genesis planner](cloth_genesis_planner.gif) | planner (Genesis PBD cloth) | 860100 | 1040 | success | Towel parameters and success criterion taken from the owner's real thick-towel teleop half fold; physical friction-limited grasp (no pinning); full real-arm controller settings; 6 of 8 held-out seeds strict (7 of 8 by the task criterion); GIF at half frame rate. |
-| ![cloth genesis steering](cloth_genesis_steering.gif) | steering (Genesis PBD cloth) | 870100 | 960 | success | Soft CS-Pi steering of pi0.5: every executed action is a CS-Pi-guided pi0.5 chunk (no planner actions); the planner only times the gripper close. Towel and success criterion from the owner's real thick-towel fold. Physical friction-limited grasp: 4 grasps and 24 physical near-miss grasps in this episode. Pilot 3/6 so far. GIF at half frame rate. |
+| ![cloth genesis planner](cloth_genesis_planner.gif) | planner (Genesis PBD cloth) | 860100 | 1040 | success | Towel parameters and success criterion taken from the owner's real thick-towel teleop half fold; physical friction-limited grasp (no pinning); full real-arm controller settings; 6 of 8 held-out seeds strict (7 of 8 by the task criterion); GIF at half frame rate. Success criterion from the real fold: each moved corner within 15 cm of its target, matching how far the real thick-towel corner landed. |
+| ![cloth genesis steering](cloth_genesis_steering.gif) | steering (Genesis PBD cloth) | 870100 | 960 | success | Soft CS-Pi steering of pi0.5: every executed action is a CS-Pi-guided pi0.5 chunk (no planner actions); the planner only times the gripper close. Towel and success criterion from the owner's real thick-towel fold. Physical friction-limited grasp: 4 grasps and 24 physical near-miss grasps in this episode. Pilot 5/12 strict. GIF at half frame rate. Success criterion from the real fold: each moved corner within 15 cm of its target, matching how far the real thick-towel corner landed. |
 
 ## Status
 
