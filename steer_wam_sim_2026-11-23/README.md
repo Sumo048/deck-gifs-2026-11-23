@@ -15,6 +15,7 @@ Going forward, every steering method uses the planner's gripper timing; a single
 
 ## Updates
 
+- 2026-11-24: bag_steering.gif replaced (seed 800209, 312 steps, success; the earlier pre-fix failure tile is gone). Pilot 2/12; scripted planner 9/20 on this task.
 - 2026-11-24: Wording: all steering going forward uses the planner's gripper timing; the two intent-only GIFs (bag without handles, Genesis cloth) are labelled as comparisons that used pi0.5's own gripper.
 - 2026-11-24: cloth_genesis_intent.gif added (Genesis PBD cloth, intent-only steering, seed 860104, 432 steps, success; 1/5 strict overall); cloth result added to the intent-only summary.
 - 2026-11-23: bag_planner.gif replaced (seed 800103, 168 steps, success, full real-arm settings); added an "Intent-only steering results" summary (bag_pick, book, pour).
@@ -47,7 +48,7 @@ Going forward, every steering method uses the planner's gripper timing; a single
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
 | ![bag planner](bag_planner.gif) | planner | 800103 | 168 | success | scripted planner under the full real-arm settings (controller v3, torque clamp); real success criterion: block in the bag, bag lifted by a handle. |
-| ![bag steering](bag_steering.gif) | steering | 800000 | 480 | **FAILURE** (**PRE-FIX / STOPGAP tile**) | bag_pilot2 predates the gripper bug fix; failure; to be replaced |
+| ![bag steering](bag_steering.gif) | steering | 800209 | 312 | success | Soft CS-Pi steering of pi0.5 with the planner's gripper timing (current method, before the unified algorithm), full real-arm settings, real success criterion (block in the bag, bag lifted by a handle). Pilot 2/12; the scripted planner is 9/20 on this task. |
 
 ## Bag without handles (`bag_pick`)
 
