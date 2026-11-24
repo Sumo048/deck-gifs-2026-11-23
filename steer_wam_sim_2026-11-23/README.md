@@ -15,6 +15,7 @@ Going forward, every steering method uses the planner's gripper timing; a single
 
 ## Updates
 
+- 2026-11-24: chips_steering.gif replaced (seed 800460, 272 steps, success, pull from under the book; pilot 10/12, PROVISIONAL). Chips planner note: 18/24 pull, 21/24 pick at 50% occlusion.
 - 2026-11-24: bag_steering.gif replaced (seed 800209, 312 steps, success; the earlier pre-fix failure tile is gone). Pilot 2/12; scripted planner 9/20 on this task.
 - 2026-11-24: Wording: all steering going forward uses the planner's gripper timing; the two intent-only GIFs (bag without handles, Genesis cloth) are labelled as comparisons that used pi0.5's own gripper.
 - 2026-11-24: cloth_genesis_intent.gif added (Genesis PBD cloth, intent-only steering, seed 860104, 432 steps, success; 1/5 strict overall); cloth result added to the intent-only summary.
@@ -40,8 +41,8 @@ Going forward, every steering method uses the planner's gripper timing; a single
 
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
-| ![chips planner](chips_planner.gif) | planner | 800104 | 184 | success | pick up the packet, occlusion 50% |
-| ![chips steering](chips_steering.gif) | steering | 800001 | 152 | success | pull from under the book, occlusion 50% Real replay check still fails (packet placement), chips results remain provisional. |
+| ![chips planner](chips_planner.gif) | planner | 800104 | 184 | success | pick up the packet, occlusion 50%; planner 18/24 pull, 21/24 pick at 50% occlusion |
+| ![chips steering](chips_steering.gif) | steering | 800460 | 272 | success (**PROVISIONAL**) | Pull the packet from under the book, occlusion 50%. Soft CS-Pi steering of pi0.5 with the planner's gripper timing (current method, before the unified algorithm), full real-arm settings, episode length set from the real teleop trials. Pilot 10/12 (pull 4/6, pick 6/6). PROVISIONAL: the replay check against the real recordings still fails (packet placement). |
 
 ## Bag with handles (`bag`)
 
