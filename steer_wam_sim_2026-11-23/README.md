@@ -6,6 +6,8 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 
 **Intent-only steering results.**
 
+Going forward, every steering method uses the planner's gripper timing; a single intent-only algorithm (position and orientation, planner gripper, one strength per task) is being evaluated. The results below used pi0.5's own gripper and are kept as comparisons.
+
 - Bag without handles: pure intent-only 3/12; with the planner timing the gripper 6/12; current steering 12/12; planner 9/12; same 12 scenes.
 - Book: intent-only 0/24 at every level tried; pi0.5 neither pushes the book to the edge nor turns its wrist to the side grasp, so book keeps the current steering; current steering 16/24, planner 18/24.
 - Pour: blocked, because the planner fails under the real-arm settings.
@@ -13,6 +15,7 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 
 ## Updates
 
+- 2026-11-24: Wording: all steering going forward uses the planner's gripper timing; the two intent-only GIFs (bag without handles, Genesis cloth) are labelled as comparisons that used pi0.5's own gripper.
 - 2026-11-24: cloth_genesis_intent.gif added (Genesis PBD cloth, intent-only steering, seed 860104, 432 steps, success; 1/5 strict overall); cloth result added to the intent-only summary.
 - 2026-11-23: bag_planner.gif replaced (seed 800103, 168 steps, success, full real-arm settings); added an "Intent-only steering results" summary (bag_pick, book, pour).
 - 2026-11-23: Genesis PBD cloth rows: steering pilot now 5/12 strict (was 3/6 so far); both Genesis rows now state the success criterion (each moved corner within 15 cm of its target). No GIF change.
@@ -52,7 +55,7 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 |---|---|---|---|---|---|
 | ![bag_pick planner](bag_pick_planner.gif) | planner | 850002 | 80 | success | placement P1 |
 | ![bag_pick steering](bag_pick_steering.gif) | steering | 850002 | 72 | success | pilot_a |
-| ![bag_pick intent-only](bag_pick_intent.gif) | intent-only steering | 880004 | 216 | success | Intent-only soft CS-Pi: steering uses only the planner's direction to the next subgoal; every executed action, including the gripper, is pi0.5's own (no planner actions). Pilot 3/12 strict; the scripted planner gets 9/12 on the same seeds. |
+| ![bag_pick intent-only](bag_pick_intent.gif) | intent-only steering | 880004 | 216 | success | Comparison (pi0.5's own gripper): Intent-only soft CS-Pi: steering uses only the planner's direction to the next subgoal; every executed action, including the gripper, is pi0.5's own (no planner actions). Pilot 3/12 strict; the scripted planner gets 9/12 on the same seeds. |
 
 ## Pour (`pour`)
 
@@ -76,7 +79,7 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 | ![cloth steering](cloth_steering.gif) | steering (MuJoCo towel) | 860000 | 272 | success | MuJoCo towel. Steering pilot success (soft CS-Pi, SW_CTRL_DR=2 SW_SERVO_FF=1 SW_DR=1 FORK_TC=last, no STIFF, 2 cm mesh, pre-calibration material), re-rendered by replaying its executed actions with the new towel visuals: B-spline skin + real brown terry dobby look (2026-11-22 towel), counter-light cloth tone; replay ends in strict success (log drift after the first trial close, mm-level) |
 | ![cloth genesis planner](cloth_genesis_planner.gif) | planner (Genesis PBD cloth) | 860100 | 1040 | success | Towel parameters and success criterion taken from the owner's real thick-towel teleop half fold; physical friction-limited grasp (no pinning); full real-arm controller settings; 6 of 8 held-out seeds strict (7 of 8 by the task criterion); GIF at half frame rate. Success criterion from the real fold: each moved corner within 15 cm of its target, matching how far the real thick-towel corner landed. |
 | ![cloth genesis steering](cloth_genesis_steering.gif) | steering (Genesis PBD cloth) | 870100 | 960 | success | Soft CS-Pi steering of pi0.5: every executed action is a CS-Pi-guided pi0.5 chunk (no planner actions); the planner only times the gripper close. Towel and success criterion from the owner's real thick-towel fold. Physical friction-limited grasp: 4 grasps and 24 physical near-miss grasps in this episode. Pilot 5/12 strict. GIF at half frame rate. Success criterion from the real fold: each moved corner within 15 cm of its target, matching how far the real thick-towel corner landed. |
-| ![cloth genesis intent-only](cloth_genesis_intent.gif) | intent-only steering (Genesis PBD cloth) | 860104 | 432 | success | Intent-only steering: pi0.5's own actions and gripper, steered only toward a simple planner's subgoals. 1/5 strict on the same 8 seeds where the full planner gets 6/8, a simple planner 2/8 and unsteered pi0.5 0/4. Main failure: pi0.5's own gripper misses the cloth pinch. |
+| ![cloth genesis intent-only](cloth_genesis_intent.gif) | intent-only steering (Genesis PBD cloth) | 860104 | 432 | success | Comparison (pi0.5's own gripper): Intent-only steering: pi0.5's own actions and gripper, steered only toward a simple planner's subgoals. 1/5 strict on the same 8 seeds where the full planner gets 6/8, a simple planner 2/8 and unsteered pi0.5 0/4. Main failure: pi0.5's own gripper misses the cloth pinch. |
 
 ## Status
 
