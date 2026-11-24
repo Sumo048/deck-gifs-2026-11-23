@@ -2,19 +2,18 @@
 
 MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of either the scripted planner or the steered pi0.5-DROID policy (soft CS-Pi steering), shown as exterior camera | wrist camera side by side. Physics, visuals, camera and controller are domain-randomised. Tiles marked FAILURE or PRE-FIX / STOPGAP are not representative final results.
 
-Intent-only steering (a variant) uses only the planner's direction to the next subgoal as the steering signal; every executed action, including the gripper, is the policy's own, with no planner actions.
+**Intent-only steering results (unified algorithm).** One steering algorithm for every task: intent-only steering of position and orientation, the planner's gripper timing, no planner actions; only the steering strength differs per task.
 
-**Intent-only steering results.**
+- Bag without handles: 6/12.
+- Book: 0/24 at strengths 1-8, because pi0.5 never presses and drags the book to the edge; higher strengths are being tested.
+- Pour: not run, because its planner fails.
+- Chips, bag with handles and Genesis cloth are next.
 
-Going forward, every steering method uses the planner's gripper timing; a single intent-only algorithm (position and orientation, planner gripper, one strength per task) is being evaluated. The results below used pi0.5's own gripper and are kept as comparisons.
-
-- Bag without handles: pure intent-only 3/12; with the planner timing the gripper 6/12; current steering 12/12; planner 9/12; same 12 scenes.
-- Book: intent-only 0/24 at every level tried; pi0.5 neither pushes the book to the edge nor turns its wrist to the side grasp, so book keeps the current steering; current steering 16/24, planner 18/24.
-- Pour: blocked, because the planner fails under the real-arm settings.
-- Cloth (Genesis PBD cloth): intent-only pi0.5's own actions and gripper, steered only toward a simple planner's subgoals. 1/5 strict on the same 8 seeds where the full planner gets 6/8, a simple planner 2/8 and unsteered pi0.5 0/4. Main failure: pi0.5's own gripper misses the cloth pinch.
+Earlier results with pi0.5's own gripper (kept as comparisons): bag without handles 3/12, book 0/24, Genesis cloth 1/5.
 
 ## Updates
 
+- 2026-11-24: bag_pick_intent.gif replaced with the unified steering algorithm (seed 880006, 192 steps, success; 6/12 at strength 1, planner 9/12). Intent-only results paragraph rewritten to lead with the unified algorithm; earlier pi0.5-own-gripper results kept as comparisons.
 - 2026-11-24: chips_steering.gif replaced (seed 800460, 272 steps, success, pull from under the book; pilot 10/12, PROVISIONAL). Chips planner note: 18/24 pull, 21/24 pick at 50% occlusion.
 - 2026-11-24: bag_steering.gif replaced (seed 800209, 312 steps, success; the earlier pre-fix failure tile is gone). Pilot 2/12; scripted planner 9/20 on this task.
 - 2026-11-24: Wording: all steering going forward uses the planner's gripper timing; the two intent-only GIFs (bag without handles, Genesis cloth) are labelled as comparisons that used pi0.5's own gripper.
@@ -57,7 +56,7 @@ Going forward, every steering method uses the planner's gripper timing; a single
 |---|---|---|---|---|---|
 | ![bag_pick planner](bag_pick_planner.gif) | planner | 850002 | 80 | success | placement P1 |
 | ![bag_pick steering](bag_pick_steering.gif) | steering | 850002 | 72 | success | pilot_a |
-| ![bag_pick intent-only](bag_pick_intent.gif) | intent-only steering | 880004 | 216 | success | Comparison (pi0.5's own gripper): Intent-only soft CS-Pi: steering uses only the planner's direction to the next subgoal; every executed action, including the gripper, is pi0.5's own (no planner actions). Pilot 3/12 strict; the scripted planner gets 9/12 on the same seeds. |
+| ![bag_pick unified](bag_pick_intent.gif) | unified steering (intent-only, planner gripper) | 880006 | 192 | success | One steering algorithm for every task: intent-only steering of position and orientation, the planner's gripper timing, no planner actions; only the steering strength differs per task (here 1). 6/12 at strength 1 (4, 5, 4 of 12 at strengths 2, 4, 8); planner 9/12 on the same seeds. |
 
 ## Pour (`pour`)
 
