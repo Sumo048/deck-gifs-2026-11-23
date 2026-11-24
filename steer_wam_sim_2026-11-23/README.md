@@ -4,8 +4,15 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 
 Intent-only steering (a variant) uses only the planner's direction to the next subgoal as the steering signal; every executed action, including the gripper, is the policy's own, with no planner actions.
 
+**Intent-only steering results.**
+
+- Bag without handles: pure intent-only 3/12; with the planner timing the gripper 6/12; current steering 12/12; planner 9/12; same 12 scenes.
+- Book: intent-only 0/24 at every level tried; pi0.5 neither pushes the book to the edge nor turns its wrist to the side grasp, so book keeps the current steering; current steering 16/24, planner 18/24.
+- Pour: blocked, because the planner fails under the real-arm settings.
+
 ## Updates
 
+- 2026-11-23: bag_planner.gif replaced (seed 800103, 168 steps, success, full real-arm settings); added an "Intent-only steering results" summary (bag_pick, book, pour).
 - 2026-11-23: Genesis PBD cloth rows: steering pilot now 5/12 strict (was 3/6 so far); both Genesis rows now state the success criterion (each moved corner within 15 cm of its target). No GIF change.
 - 2026-11-23: cloth_genesis_steering.gif added (Genesis PBD cloth, soft CS-Pi steering, seed 870100, 960 steps, success; pilot 3/6 so far; GIF at half frame rate). Chips steering note: real replay check still fails (packet placement), chips results remain provisional.
 - 2026-11-23: Genesis PBD cloth planner note updated: 6 of 8 held-out seeds strict (7 of 8 by the task criterion). No GIF change.
@@ -34,7 +41,7 @@ Intent-only steering (a variant) uses only the planner's direction to the next s
 
 | GIF | Method | Seed | Steps | Outcome | Notes |
 |---|---|---|---|---|---|
-| ![bag planner](bag_planner.gif) | planner | 800103 | 224 | success | after the gripper (trial-close ref) fix; planner acceptance 5/20 so far |
+| ![bag planner](bag_planner.gif) | planner | 800103 | 168 | success | scripted planner under the full real-arm settings (controller v3, torque clamp); real success criterion: block in the bag, bag lifted by a handle. |
 | ![bag steering](bag_steering.gif) | steering | 800000 | 480 | **FAILURE** (**PRE-FIX / STOPGAP tile**) | bag_pilot2 predates the gripper bug fix; failure; to be replaced |
 
 ## Bag without handles (`bag_pick`)
