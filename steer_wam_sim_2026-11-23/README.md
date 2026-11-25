@@ -5,7 +5,7 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 **Intent-only steering results (unified algorithm).** One steering algorithm for every task: intent-only steering of position and orientation, the planner's gripper timing, no planner actions; only the steering strength differs per task.
 
 - Bag without handles: 6/12.
-- Book: 0/24 at strengths 1-8, because pi0.5 never presses and drags the book to the edge; higher strengths are being tested.
+- Book: unified algorithm at fixed strength 0/24; with the adaptive collection controller 19/24 (slide and pick) and 15/24 (pick) over the last 24 episodes.
 - Pour: not run, because its planner fails.
 - Chips, bag with handles and Genesis cloth are next.
 
@@ -13,6 +13,7 @@ Earlier results with pi0.5's own gripper (kept as comparisons): bag without hand
 
 ## Updates
 
+- 2026-11-24: book_intent_collect.gif (book_platform_1, seed 890022, 728 steps) and book_pick_intent_collect.gif (seed 890022, 696 steps) added: unified steering with the adaptive collection controller, 19/24 and 15/24 over the last 24 episodes. Intent-only book bullet updated.
 - 2026-11-24: bag_pick_intent.gif replaced with the unified steering algorithm (seed 880006, 192 steps, success; 6/12 at strength 1, planner 9/12). Intent-only results paragraph rewritten to lead with the unified algorithm; earlier pi0.5-own-gripper results kept as comparisons.
 - 2026-11-24: chips_steering.gif replaced (seed 800460, 272 steps, success, pull from under the book; pilot 10/12, PROVISIONAL). Chips planner note: 18/24 pull, 21/24 pick at 50% occlusion.
 - 2026-11-24: bag_steering.gif replaced (seed 800209, 312 steps, success; the earlier pre-fix failure tile is gone). Pilot 2/12; scripted planner 9/20 on this task.
@@ -71,6 +72,8 @@ Earlier results with pi0.5's own gripper (kept as comparisons): bag without hand
 |---|---|---|---|---|---|
 | ![book planner](book_planner.gif) | planner | 833001 | 720 | success | j6-legal scripted planner (SW_J6_LIMIT=1, grasp search j6 >= 1.65), stored randomised frames (VIS_RECORD), ext \| wrist at 15 fps; min j6 after start 1.980 rad |
 | ![book steering](book_steering.gif) | steering | 836105 | 640 | success (with planner fallback on 26% of steps, not pure steering) | Book slide-to-edge then pick (book_platform_1). Steering with planner fallback under the real-arm settings (torque clamp SW_CTRL_CLAMP=1, controller v3, compliant arm, j6 limit): planner's own chunk executed on 26% of steps (slide 87%, grasp+lift 17%); the rest are CS-Pi-guided pi0.5 chunks. Pilot: 2/12 strict. Not pure steering. |
+| ![book_platform_1 adaptive collection](book_intent_collect.gif) | unified steering, adaptive collection (book_platform_1) | 890022 | 728 | success | One steering algorithm for every task: the planner gives only direction and pose, the planner times the gripper, no planner actions. Strength adapts per step and is capped per task by a controller aiming at about 50-60% success while staying as policy-like as possible. Collection pilot: 19/24 over the last 24 episodes (27/48 overall); cap settled at 0.5; mean strength 0.41; hand speed about the policy's own. |
+| ![book_pick adaptive collection](book_pick_intent_collect.gif) | unified steering, adaptive collection (book_pick) | 890022 | 696 | success | One steering algorithm for every task: the planner gives only direction and pose, the planner times the gripper, no planner actions. Strength adapts per step and is capped per task by a controller aiming at about 50-60% success while staying as policy-like as possible. Collection pilot: 15/24 over the last 24 (22/48 overall); cap 0.875; mean strength 0.43; hand speed about the policy's own. |
 
 ## Cloth (MuJoCo towel fold) (`cloth`)
 
