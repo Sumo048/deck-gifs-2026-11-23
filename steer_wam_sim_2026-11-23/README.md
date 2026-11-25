@@ -4,7 +4,7 @@ MuJoCo digital twin of a Franka + Robotiq 2F-85 bench. Each tile is a rollout of
 
 **Intent-only steering results (unified algorithm).** One steering algorithm for every task: intent-only steering of position and orientation, the planner's gripper timing, no planner actions; only the steering strength differs per task.
 
-- Bag without handles: 6/12.
+- Bag without handles: adaptive collection 40/48 at mean strength 0.01 (planner 9/12 on the earlier seeds).
 - Book: unified algorithm at fixed strength 0/24; with the adaptive collection controller 19/24 (slide and pick) and 15/24 (pick) over the last 24 episodes.
 - Pour: not run, because its planner fails.
 - Chips, bag with handles and Genesis cloth are next.
@@ -13,6 +13,7 @@ Earlier results with pi0.5's own gripper (kept as comparisons): bag without hand
 
 ## Updates
 
+- 2026-11-25: bag_pick_intent.gif replaced with the adaptive collection run (seed 890001, 184 steps, success; collection pilot 40/48 at mean strength 0.01). Intent-only bag bullet updated.
 - 2026-11-24: book_intent_collect.gif (book_platform_1, seed 890022, 728 steps) and book_pick_intent_collect.gif (seed 890022, 696 steps) added: unified steering with the adaptive collection controller, 19/24 and 15/24 over the last 24 episodes. Intent-only book bullet updated.
 - 2026-11-24: bag_pick_intent.gif replaced with the unified steering algorithm (seed 880006, 192 steps, success; 6/12 at strength 1, planner 9/12). Intent-only results paragraph rewritten to lead with the unified algorithm; earlier pi0.5-own-gripper results kept as comparisons.
 - 2026-11-24: chips_steering.gif replaced (seed 800460, 272 steps, success, pull from under the book; pilot 10/12, PROVISIONAL). Chips planner note: 18/24 pull, 21/24 pick at 50% occlusion.
@@ -57,7 +58,7 @@ Earlier results with pi0.5's own gripper (kept as comparisons): bag without hand
 |---|---|---|---|---|---|
 | ![bag_pick planner](bag_pick_planner.gif) | planner | 850002 | 80 | success | placement P1 |
 | ![bag_pick steering](bag_pick_steering.gif) | steering | 850002 | 72 | success | pilot_a |
-| ![bag_pick unified](bag_pick_intent.gif) | unified steering (intent-only, planner gripper) | 880006 | 192 | success | One steering algorithm for every task: intent-only steering of position and orientation, the planner's gripper timing, no planner actions; only the steering strength differs per task (here 1). 6/12 at strength 1 (4, 5, 4 of 12 at strengths 2, 4, 8); planner 9/12 on the same seeds. |
+| ![bag_pick adaptive collection](bag_pick_intent.gif) | unified steering, adaptive collection | 890001 | 184 | success | Same algorithm as every task: the planner gives only direction and pose and times the gripper; no planner actions. The adaptive controller lowered the strength cap to 0 because the policy already succeeds: mean strength 0.01, so this is essentially the policy's own motion. Collection pilot 40/48 (18/24 over the last 24); hand speed 0.99x the policy's. |
 
 ## Pour (`pour`)
 
